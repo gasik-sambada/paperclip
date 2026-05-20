@@ -60,6 +60,14 @@ RUN npm install --global --omit=dev @anthropic-ai/claude-code@latest @openai/cod
   && mkdir -p /paperclip \
   && chown node:node /paperclip
 
+# =============================================================
+# TAMBAHKAN INSTALASI HERMES DI SINI
+# =============================================================
+RUN mkdir -p /paperclip/bin && \
+    curl -L https://github.com/informalsystems/hermes/releases/download/v1.13.2/hermes-v1.13.2-x86_64-unknown-linux-gnu.tar.gz | tar -C /paperclip/bin/ -vxzf - && \
+    chown -R node:node /paperclip/bin
+# =============================================================
+
 COPY scripts/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
